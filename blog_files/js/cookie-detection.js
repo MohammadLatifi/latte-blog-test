@@ -44,7 +44,7 @@ window.onload = function() {
         const bookmarkButton = item.querySelector('.views-field-field-bookmark .fr-bookmark');
         
 
-        if (elementData.isLiked) {
+        if (elementData.isLiked === true) {
             bookmarkButton.classList.add('latte-bookmark-liked');
         } 
 
