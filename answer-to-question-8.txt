@@ -1,0 +1,16 @@
+Hi, It was a great exercise.
+
+I almost did all the tasks and in doing the tasks I used chatGPT because sometime I know 
+there is a code that I can do this but I dont remember the syntaxes so faster to search web
+and today the search is chatGPT. in total I guess it took me 5 hours to do all the tasks.
+
+for the final question: 
+if something like that happens I will ask for clarifications about what has been changed or if I 
+can see it in github I will check my self to see to what extent codebase is changed.
+
+If I have to redo most of the part I will notify the manager of the team and ask for enough time to 
+fix the issues and see what it the management call for this situation. after all it is a team work and I cant make individual 
+decision that effects the work-flow too much.
+
+if we want to redo I will try to reuse most of parts that I can use and I will try to write as modular 
+as I can so it will be possible to change some parts only. 
