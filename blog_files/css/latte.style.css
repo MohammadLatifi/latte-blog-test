@@ -823,3 +823,52 @@ svg:not(:root).svg-inline--fa {
 .latte-bookmark-liked > svg > path {
   fill: #ff253a !important;
 }
+
+.latte-modal {
+  display: none; /* Hidden by default */
+  align-items: center;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+.latte-modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* Modal accept button */
+.latte-modal button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.latte-modal #close-btn {
+  background-color: #f44336;
+}
+
+.modal-content {
+  min-width: unset !important;
+  background-color: white !important;
+  padding: 1rem !important;
+  border-radius: 12px !important;
+
+
+}
+
+.modal-container {
+  margin-inline: 33%;
+}

@@ -4,7 +4,10 @@ import Toastify from '../../node_modules/toastify-js/src/toastify-es.js';
 window.onload = function() {
     buildBookmarkContent();
 
+    
+
     let gridItems = document.querySelectorAll('.views-view-responsive-grid__item');
+    console.log(gridItems);
     let itemsCookies = retrieveInfoFromCookies();
  
     let index = 0 ;
@@ -16,12 +19,13 @@ window.onload = function() {
         const mainTag = item.querySelector('.views-field-field-cat-princ-articolo .field__item').textContent.trim();
         const description = item.querySelector('.views-field-field-introduzione p').textContent.trim();
         const tag = item.querySelector('.views-field-field-tag .field__item').textContent.trim();
-        const articleId = url
+        const identifier = url
 
-        let existingCookie = itemsCookies.find(cookie => cookie.articleId === articleId);
+        let existingCookie = itemsCookies.find(cookie => cookie.identifier === identifier);
     
         const elementData = {
             index:index,
+            identifier: existingCookie ? existingCookie.identifier : identifier,
             tipoArticolo: existingCookie ? existingCookie.tipoArticolo : tipoArticolo,
             imageUrl: existingCookie ? existingCookie.imageUrl : imageUrl,
             title: existingCookie ? existingCookie.title : title,
@@ -29,11 +33,13 @@ window.onload = function() {
             mainTag: existingCookie ? existingCookie.mainTag : mainTag,
             description: existingCookie ? existingCookie.description : description,
             tag: existingCookie ? existingCookie.tag : tag,
-            articleId: existingCookie ? existingCookie.articleId : articleId,
             isLiked: existingCookie ? existingCookie.isLiked : false
         };
 
-        Cookies.set('latte_card_' + index, JSON.stringify(elementData));
+        if(!existingCookie){
+            Cookies.set('latte_card_' + index, JSON.stringify(elementData));
+            index+=1
+        }
 
         const bookmarkButton = item.querySelector('.views-field-field-bookmark .fr-bookmark');
         
@@ -42,6 +48,8 @@ window.onload = function() {
             bookmarkButton.classList.add('latte-bookmark-liked');
         } 
 
+        
+
         bookmarkButton.addEventListener('click', function(event) {
             event.preventDefault();
             elementData.isLiked = !elementData.isLiked;
@@ -49,56 +57,87 @@ window.onload = function() {
             const item = pathElement.closest('.views-view-responsive-grid__item');
             const url = item.querySelector('.views-field-title a').getAttribute('href');
             const itemsCookies = retrieveInfoFromCookies();
-            let existingCookie = itemsCookies.find(cookie => cookie.articleId === articleId);
-      
-            if (elementData.isLiked) {
-                bookmarkButton.classList.add('latte-bookmark-liked');
-                existingCookie.isLiked = true;
-                Cookies.set('latte_card_' + existingCookie.index, JSON.stringify(elementData));
-                Toastify({
-                    text: "added to Bookmarks Cookies!",
-                    duration: 2000,
-                    newWindow: true,
-                    close: true,
-                    gravity: "top", 
-                    position: "right", 
-                    stopOnFocus: true, 
-                    style: {
-                      background: "linear-gradient(to right, #00b09b, #96c93d)",
-                    }
-                  
-                  }).showToast();
-                  
+            let existingCookie = itemsCookies.find(cookie => cookie.identifier === url);
+            var modals = document.getElementById("bookmarks-modals");
+            modals.innerHTML = ` 
+            <div id="bookmark-modal" class="latte-modal">
+                <div class="modal-container">
+                    <div class="modal-content">
+                        <p id ="bookmark-modal-content"></p>
+                        <div>
+                            <button id="accept-btn">Accept</button>
+                            <button id="close-btn">Close</button>
+                        </div>
+                    </div>
+                </div>
+          </div>`;
 
-            } else {
-                bookmarkButton.classList.remove('latte-bookmark-liked');
-                existingCookie.isLiked = false;
-                Cookies.set('latte_card_' + existingCookie.index, JSON.stringify(elementData));
-                Toastify({
-                    text: "removed from Bookmarks Cookies!",
-                    duration: 2000,
-                    newWindow: true,
-                    close: true,
-                    gravity: "top", 
-                    position: "right", 
-                    stopOnFocus: true, 
-                    style: {
-                      background: "linear-gradient(to right, #00b09b, #96c93d)",
-                    }
-                  
-                  }).showToast();
-            }
-    
+            let modal = modals.querySelector('.latte-modal')
+            var modalContent = modals.querySelector("#bookmark-modal-content");
+            var acceptBtn = modals.querySelector("#accept-btn");
+            var closeBtn = modals.querySelector("#close-btn");
+            modal.style.display = "flex";
+      
+           
+            modalContent.innerHTML = elementData.isLiked === false ? 'Are you sure you want to remove card from Bookmarks?' : 'Are you sure you want to add card to Bookmarks?' ;
+            closeBtn.addEventListener("click", function() {
+                modal.style.display = "none";
+            })
+            
+            
+            
+            acceptBtn.addEventListener("click", function() {
+                if (elementData.isLiked === true) {
+                        
+                        modal.style.display = "none";
+                        bookmarkButton.classList.add('latte-bookmark-liked');
+                        existingCookie.isLiked = true;
+                        Cookies.set('latte_card_' + existingCookie.index, JSON.stringify(elementData));
+                        Toastify({
+                            text: "added to Bookmarks Cookies!",
+                            duration: 2000,
+                            newWindow: true,
+                            close: true,
+                            gravity: "top", 
+                            position: "right", 
+                            stopOnFocus: true, 
+                            style: {
+                            background: "linear-gradient(to right, #00b09b, #96c93d)",
+                            }
+                        
+                        }).showToast();
+                
+                    }else {
+              
+                    
+                        modal.style.display = "none";
+                        bookmarkButton.classList.remove('latte-bookmark-liked');
+                        existingCookie.isLiked = false;
+                        Cookies.set('latte_card_' + existingCookie.index, JSON.stringify(elementData));
+                        Toastify({
+                            text: "removed from Bookmarks Cookies!",
+                            duration: 2000,
+                            newWindow: true,
+                            close: true,
+                            gravity: "top", 
+                            position: "right", 
+                            stopOnFocus: true, 
+                            style: {
+                            background: "linear-gradient(to right, #00b09b, #96c93d)",
+                            }
+                        
+                        }).showToast();
+                    };
+
+                   
+                });
+
+
+        
         });
 
-        Cookies.set('latte_card_' + index, JSON.stringify(elementData));
-        index+=1
+
     });
-    
-
-    
-    
-
 
 };
 
