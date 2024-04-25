@@ -3,6 +3,27 @@ Hi, It was a great exercise.
 I almost did all the tasks and in doing the tasks I used chatGPT because sometime I know 
 there is a code that I can do this but I dont remember the syntaxes so faster to search web
 and today the search is chatGPT. in total I guess it took me 5 hours to do all the tasks.
+// --------------------------------------------------------------------------------------
+// explanation for path I took:
+
+ 1- first I tried to make the code more readable for myself :
+    I moved the css and js to external files. 
+
+ 2- I first tried to read all cards and exteract the informations requested in tasks
+    to save them in cookies
+
+ 3- I added a property to each cookey for each card to store if the card is liked or not
+ 4- then I made a function to read the cookes and retrieve the data to check on page
+    load which card should have the bookmark with red color
+ 5- then i installed a light weighted package to show toasts for notifications
+ 6- then added a simple modal made in my js file and inject  it on event of clicking the 
+    bookmark tag
+ 7- then I checked the css problem and tried positioning them inline-block
+
+    if you like more explenations let me know in email.
+
+
+// --------------------------------------------------------------------------------------
 
 for the final question: 
 if something like that happens I will ask for clarifications about what has been changed or if I 

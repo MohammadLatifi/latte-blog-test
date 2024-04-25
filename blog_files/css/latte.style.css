@@ -876,7 +876,7 @@ svg:not(:root).svg-inline--fa {
 .views-field-field-cat-princ-articolo,
 .views-field-field-bookmark {
     display: inline-block;
-    vertical-align: middle;
+    
 }
 
 .views-field-field-cat-princ-articolo{
@@ -884,12 +884,12 @@ svg:not(:root).svg-inline--fa {
   margin-right: 18%;
 }
 
-.views-field-field-cat-princ-articolo .field--name-name.field--type-string.field--label-hidden.field__item {
-
-  font-size: 8px;
-}
-
 .views-field-field-bookmark {
   width: 10%;
   padding-left: 5%;
+}
+
+.views-field-field-cat-princ-articolo .field--name-name.field--type-string.field--label-hidden.field__item {
+
+  font-size: 8px;
 }
